@@ -2,7 +2,10 @@ package com.example;
 
 import javax.faces.bean.ManagedBean;
 
-@ManagedBean //older versions didn't have this annotation. Instead, the file 'faces-config.xml' was used to configure ManagedBeans.
+/**
+ * Older versions didn't have 'ManagedBean' annotation. Instead, the file 'faces-config.xml' was used to configure ManagedBeans.
+ */
+@ManagedBean
 public class HelloWorldBean {
 	
 	private String name;
