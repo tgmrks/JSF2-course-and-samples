@@ -7,16 +7,13 @@ xmlns:h="http://java.sun.com/jsf/html"><!-- imports library of TAGs. Then, gives
 	<title>Hello World!</title>
 </h:head>
 <h:body>
-	<h:form><!-- Use it when user input is required -->
+	<h:form>
 		Your name:
-		<h:inputText value="#{helloWorldBean.name}" /><!-- binding component to the class atribute 'nome' -->
-		<br/>
-		Original: #{helloWorldBean.name}
-		<br/>		
-		Upper Case: #{helloWorldBean.modifiedName}
-		<br/>
-		<h:commandButton value="Do!" 
-		action="#{helloWorldBean.toUpperCase}"/><!-- calling method -->
+		<h:inputText binding="#{helloWorldBean.field}" /><!-- binding component to the class atribute 'name' -->
+	
+		<h:commandButton value="Do!"
+		binding="#{helloWorldBean.button}" 
+		action="#{helloWorldBean.change}"/><!-- calling method -->
 	</h:form>
 </h:body>
 </html>

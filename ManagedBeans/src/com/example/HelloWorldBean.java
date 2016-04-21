@@ -5,8 +5,8 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean //older versions didn't have this annotation. Instead, the file 'faces-config.xml' was used to configure ManagedBeans.
 public class HelloWorldBean {
 	
-	String name;
-	String modifiedName;
+	private String name;
+	private String modifiedName;
 	
 	public String getName() {
 		return name;
