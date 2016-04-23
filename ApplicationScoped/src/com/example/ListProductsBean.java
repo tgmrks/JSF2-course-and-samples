@@ -7,11 +7,17 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
 
 /**
- * With the 'ApplicationScoped'annotation the data instance will be alive/available while the application is running.<br/> 
- * Without it a new instance is required in every new request.
+ * With the 'ApplicationScoped' annotation, the obj instance will be alive/available while the application is running.<br/> 
+ * Different 'sessions' will access the same information.
+ *  
+ * User sessions, for instance, will use the annotation 'SessionScoped'. This way, each session will access its own information.<br/>
+ * A session lasts as its activated (in use). 
  * 
- * Different 'sessions' will access the same information.</br>
- * User session, for instance, will use the annotation 'SessionScoped'. This way, each session will access its own information. 
+ * The 'ViewScoped' will keep the obj as soon as the view/screen is alive. 
+ * 
+ * The default scope is the 'RequestScoped'. Which will require a new instance obj for each new request.
+ * 
+ * Furthermore, there is the 'NoneScoped' that will keep objects for demand. It'll distroy object for each obj access. 
  */
 @ManagedBean
 @ApplicationScoped  
