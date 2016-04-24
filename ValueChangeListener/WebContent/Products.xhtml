@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Products List</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		Try 
+		<h:commandLink value="About" action="#{listProductsBean.getAbout}"/>
+		link before and after adding to the form
+		<br/><br/>
+		Product:
+		<h:inputText value="#{listProductsBean.product.productName}"/>
+		<br/>
+		Manufacturer:
+		<h:inputText value="#{listProductsBean.product.manufacturer}"/>
+		<br/>
+		Category:
+		<h:inputText value="#{listProductsBean.product.category}"/>
+		<br/>
+		<h:commandButton value="Add"
+		action="#{listProductsBean.addItem}"
+		actionListener="#{listProductsBean.checkItem}"><!-- It will execute before 'action' attribute -->
+			<f:actionListener binding="#{buttonListener}"/><!-- This is another usage of Action Listener. It will run Before 'actionListener' attribute -->
+		</h:commandButton>				 
+	</h:form>
+	<br/><br/>
+	<h:form>
+		Search product
+		<h:inputText value="#{listProductsBean.searchProduct}" 
+		valueChangeListener="#{listProductsBean.searchProductFilter}"
+		onChange="Submit()"/><!-- JavaScript -->
+	</h:form>
+	<br/><br/>
+	<h:form>
+	<ol>
+		<ui:repeat var="item" value="#{listProductsBean.filterProducts}">
+			<li>
+			#{item.productName} - #{item.manufacturer} - #{item.category}
+			<h:commandButton value="excluir" action="#{listProductsBean.removeItem}">
+				<f:setPropertyActionListener target="#{listProductsBean.selectedItem}" value="#{item}" />
+			</h:commandButton>
+			</li>
+		</ui:repeat>
+	</ol>
+	</h:form>
+</h:body>
+
+</html>
