@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Form</title>
+</h:head>
+<h:body>
+	<h:form id='newsletterform'>		
+	<h:graphicImage value="/image/client-icon.png"/><!-- It will generate a img tag w/ 'value' as src -->
+	<br/>
+										<!-- Expression language -->
+		<h:outputText value="Exemple of #{form.content1} #{form.content2}. Using 'outputText'."
+		style="font-size: 19pt; font-weight: bold"/>
+		<br/>
+									<!-- Placeholders -->
+		<h:outputFormat value="Example of {0} {1}. Using ''outputFormat''."
+		style="font-size: 19pt; font-weight: lighther; color: red">
+			<f:param value="#{form.content1}"/>
+			<f:param value="#{form.content2}"/>
+		</h:outputFormat>
+		<br/><br/>
+							<!-- Linked to the inputText -->
+		<h:outputLabel for="email" value="E-mail:"/><br/>
+		<h:inputText id="email" size="50"
+		value="Click in 'E-mail' label to focus into 'inputText'" onfocus="this.value=''"/>
+		<br/>
+		
+		<h:outputLabel for="pass" value="Password:"/><br/>
+		<h:inputSecret id="pass" size="50"/>
+		<br/>
+		
+		<h:outputLabel value="Notes:"/><br/>
+		<h:inputTextarea size="70" rows="5"
+		value="This one doesn't have focus! With you click on 'Notes' label, you won't be brought to the 'inputTextarea'"/>
+		<br/><br/>
+		
+		<h:commandButton value="Send"/>
+				
+	</h:form>
+</h:body>
+</html>
