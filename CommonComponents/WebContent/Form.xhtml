@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Form</title>
+</h:head>
+<h:body>
+	<h:form id='newsletterform'>		
+	<h:graphicImage value="/image/client-icon.png"/><!-- It will generate a img tag w/ 'value' as src -->
+	<br/>
+										<!-- Expression language -->
+		<h:outputText value="Exemple of #{form.content1} #{form.content2}. Using 'outputText'."
+		style="font-size: 19pt; font-weight: bold"/>
+		<br/>
+									<!-- Placeholders -->
+		<h:outputFormat value="Example of {0} {1}. Using ''outputFormat''."
+		style="font-size: 19pt; font-weight: lighther; color: red">
+			<f:param value="#{form.content1}"/>
+			<f:param value="#{form.content2}"/>
+		</h:outputFormat>
+		
+		<br/><br/>
+							<!-- Linked to the inputText -->
+		<h:outputLabel for="email" value="E-mail:"/><br/>
+		<h:inputText id="email" size="50"
+		value="Click in 'E-mail' label to focus into 'inputText'" onfocus="this.value=''"/>
+		<br/>
+		
+		<h:outputLabel for="pass" value="Password:"/><br/>
+		<h:inputSecret id="pass" size="50"/>
+		<br/>
+		
+		<h:outputLabel value="Notes:"/><br/>
+		<h:inputTextarea size="70" rows="5"
+		value="This one doesn't have focus! With you click on 'Notes' label, you won't be brought to the 'inputTextarea'"/>
+		
+		<br/><br/>
+		
+		<h:commandButton value="Send"/>
+				
+	</h:form>
+	
+	<h:form id='selectOne'>		
+		<h1>Choose one option:</h1>
+		
+		<h:selectOneMenu id="oneOptionMenu" value="#{form.choice1}"><!-- Try 'selectOneListBox' -->
+			<f:selectItem itemValue="The Sun"/>
+			<f:selectItem itemValue="Mercury"/>
+			<f:selectItem itemValue="Venus"/>
+			<f:selectItem itemValue="The Moon"/>
+			<f:selectItem itemValue="Earth"/>
+			<f:selectItem itemValue="Mars"/>
+			<f:selectItem itemValue="Jupiter"/>
+			<f:selectItem itemValue="Saturn"/>
+			<f:selectItem itemValue="Uranus"/>
+			<f:selectItem itemValue="Neptune"/>
+			<f:selectItem itemValue="S2" itemLabel="Pluto"/>
+		</h:selectOneMenu>		
+		
+		<h:commandButton value="Choose" action="#{form.chooseOne}"/>
+		
+		<br/><br/>
+		
+		<div>
+			<h:outputText value="#{form.choice1}" rendered="#{not empty form.choice1}"
+				style="background-color: red; color: #fff; font-size: 24pt; font-family: Arial"/>
+		</div>
+							
+	</h:form>
+	
+	<h:form id="selectMany">
+		<h1>Select Many:</h1>
+		
+		<h:selectManyListbox id="manyOptionMenu" value="#{form.choice2}" size="5"><!-- The 'selectManyMenu' will work differently depending on the browser; the size may differ -->
+			<f:selectItem itemValue="The Sun"/>
+			<f:selectItem itemValue="Mercury"/>
+			<f:selectItem itemValue="Venus"/>
+			<f:selectItem itemValue="The Moon"/>
+			<f:selectItem itemValue="Earth"/>
+			<f:selectItem itemValue="Mars"/>
+			<f:selectItem itemValue="Jupiter"/>
+			<f:selectItem itemValue="Saturn"/>
+			<f:selectItem itemValue="Uranus"/>
+			<f:selectItem itemValue="Neptune"/>
+			<f:selectItem itemValue="S2" itemLabel="Pluto"/>
+		</h:selectManyListbox>
+		<br/>
+		<h:commandButton value="Select" action="#{form.chooseMany}"/>
+		
+		<br/><br/>
+		
+		<ul>
+			<ui:repeat var="item" value="#{form.choice2}">
+				<li>#{item}</li>
+			</ui:repeat>
+		</ul>
+		
+	</h:form>
+	
+</h:body>
+</html>
