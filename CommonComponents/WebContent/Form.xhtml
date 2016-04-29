@@ -46,7 +46,7 @@ xmlns:f="http://java.sun.com/jsf/core">
 	
 	<h:form id='selectOne'>		
 		<h1>Choose one option:</h1>
-		
+		Dropdown<br/>
 		<h:selectOneMenu id="oneOptionMenu" value="#{form.choice1}"><!-- Try 'selectOneListBox' -->
 			<f:selectItem itemValue="The Sun"/>
 			<f:selectItem itemValue="Mercury"/>
@@ -98,6 +98,34 @@ xmlns:f="http://java.sun.com/jsf/core">
 				<li>#{item}</li>
 			</ui:repeat>
 		</ul>
+		
+	</h:form>
+	
+	<h:form id="radioOptions">
+	<h1>Radio Button</h1>
+	Select gender:   <!-- use 'required="true"' to make radio obligatory -->  
+		<h:selectOneRadio value="#{form.gender}" layout="lineDirection"><!-- pageDirection to show verticaly -->
+			<f:selectItem itemValue="M" itemLabel="Male"/>
+			<f:selectItem itemValue="F" itemLabel="Female"/>
+		</h:selectOneRadio>
+		
+	<h1>Boolean verification and CheckBox</h1>
+	Boolean<br/>
+		<h:selectBooleanCheckbox id="bool" value="#{form.boolVerification}"/>
+			<h:outputLabel value="Are you married?" for="bool"/>
+	
+		<br/><br/>
+		Prefered programming languages:
+		<h:selectManyCheckbox value="#{form.favLang}" layout="pageDirection">
+			<f:selectItem itemValue="Java"/>
+			<f:selectItem itemValue="C#"/>
+			<f:selectItem itemValue="Ruby"/>
+			<f:selectItem itemValue="PHP"/>
+			<f:selectItem itemValue="Python"/>
+		</h:selectManyCheckbox>
+		
+		<br/><br/>
+		<h:commandButton value="Confirm" action="#{form.selectedGender}"/>
 		
 	</h:form>
 	
