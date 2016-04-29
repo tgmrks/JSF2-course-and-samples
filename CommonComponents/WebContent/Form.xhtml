@@ -34,6 +34,7 @@ xmlns:f="http://java.sun.com/jsf/core">
 		<h:inputSecret id="pass" size="50"/>
 		<br/>
 		
+		
 		<h:outputLabel value="Notes:"/><br/>
 		<h:inputTextarea size="70" rows="5"
 		value="This one doesn't have focus! With you click on 'Notes' label, you won't be brought to the 'inputTextarea'"/>
@@ -41,6 +42,7 @@ xmlns:f="http://java.sun.com/jsf/core">
 		<br/><br/>
 		
 		<h:commandButton value="Send"/>
+		<h:commandButton value="Clear" type="reset"/>
 				
 	</h:form>
 	
@@ -127,6 +129,37 @@ xmlns:f="http://java.sun.com/jsf/core">
 		<br/><br/>
 		<h:commandButton value="Confirm" action="#{form.selectedGender}"/>
 		
+	</h:form>
+	
+	<h1>OutputLink</h1>
+	Go to 
+	<h:outputLink value="http://www.google.com">Google</h:outputLink>
+	
+	<h:form>
+		<h1>PanelGrid</h1>
+		The JSF component 'panelGrid' will generate a HTML table 
+		<br/><br/>
+		
+		<h:panelGrid columns="2">
+			
+			<f:facet name="header">Form Example</f:facet>
+			
+			<h:outputLabel value="Fullname"/>
+			<h:panelGroup>
+				<h:inputText size="50"/>
+				<h:graphicImage value="image/help-icon.gif"/>
+			</h:panelGroup>
+			
+			<h:outputLabel value="E-mail"/>
+			<h:inputText size="50"/>
+			
+			<h:outputLabel value="Password"/>
+			<h:inputText size="25"/>
+			
+			<h:outputLabel/>
+			<h:commandButton value="Register"/>
+			
+		</h:panelGrid>
 	</h:form>
 	
 </h:body>

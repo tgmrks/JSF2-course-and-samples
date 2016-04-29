@@ -9,13 +9,18 @@ xmlns:f="http://java.sun.com/jsf/core">
 <title>Insert title here</title>
 </h:head>
 <h:body>
+	<h:form>
 Gender Selected: #{form.gender}
-<br/><br/>
+<br/><br />
 Boolean Verification Checked: #{form.boolVerification ? 'Married' : 'Single'}
 <br/><br/>
 Selected languages: 
 <ui:repeat var="item" value="#{form.favLang}">
 	#{item} 
 </ui:repeat>
+		<br/>
+		<br/>
+		<h:commandButton image="image/back-icon.png" action="Form?faces-redirect=true"/>
+	</h:form>
 </h:body>
 </html>
