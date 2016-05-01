@@ -162,5 +162,29 @@ xmlns:f="http://java.sun.com/jsf/core">
 		</h:panelGrid>
 	</h:form>
 	
+	<h1>DataTable</h1>
+	<h:form id="datatable">
+		
+		<h:commandButton value="Show Data" action="#{clientBean.consult}"/>
+	
+		<h:dataTable value="#{clientBean.clients}" var="item" border="1" rendered="#{not empty clientBean.clients}">
+			
+			<h:column>
+				<f:facet name="header">Cod.</f:facet>
+				<h:outputText value="#{item.cod}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+				<h:outputText value="#{item.name}"/>
+			</h:column>
+				
+			<h:column>
+				<f:facet name="header">City</f:facet>
+				<h:outputText value="#{item.city}"/>
+			</h:column>	
+		</h:dataTable>
+	</h:form>
+	
 </h:body>
 </html>
