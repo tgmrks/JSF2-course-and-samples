@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Message Components</title>
+</h:head>
+<h:body>
+	<h:form id="form">
+		<h:messages layout="table" errorStyle="color: red" infoStyle="color: green" warnStyle="color: orange" fatalStyle="color: grey"
+			showSummary="false" showDetail="true"/>
+				
+		<h:panelGrid columns="2">
+									
+			<f:facet name="header">User Form Example</f:facet>
+			
+			<h:outputLabel value="Fullname" for="name"/>
+			<h:panelGroup>
+				<h:inputText size="50" value="#{form.name}" id="name"/>
+				<h:message for="name"/>					
+			</h:panelGroup>
+			
+			<h:outputLabel value="E-mail" for="email"/>
+			<h:panelGroup>
+				<h:inputText size="50" value="#{form.email}" id="email"/>
+				<h:message for="email"/>
+			</h:panelGroup>
+			
+			<h:outputLabel value="Password" for="pass"/>
+			<h:panelGroup>
+				<h:inputText size="25" value="#{form.pass}" id="pass"/>
+				<h:message for="pass"/>
+			</h:panelGroup>
+					
+			<h:outputLabel/>
+			<h:commandButton value="Register" action="#{form.verification}"/>
+			
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>
