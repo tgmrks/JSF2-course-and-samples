@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<h:outputStylesheet library="css" name="system.css"/>
+	<h:outputStylesheet library="css" name="consult-balance.css"/>
+	
+	<title>Balance</title>
+</h:head>
+<h:body>
+	<h1>Simple Personal Financial Balance Sheet</h1>	
+
+	<h:form id="frm">
+		<h:commandButton value="New Balance"/>
+		
+		<h:dataTable var="entry" value="#{consultBalanceBean.entries}" 
+			width="100%" styleClass="grid"  headerClass="header" rowClasses="line-odd, line-even"
+			columnClasses="type, person, description, value, duedate, paiddate, status, actions">
+			
+				<h:column>
+					<h:graphicImage value="/images/out.png"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Person</f:facet>
+					<h:outputText value="Dummy"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Description</f:facet>
+					<h:outputText value="some bill paid"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Value</f:facet>
+					<h:outputText value="$ 500,00" styleClass="expenditure"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Due Date</f:facet>
+					<h:outputText value="05/03/2016"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Paid Date</f:facet>					
+					<h:outputText value="05/03/2016"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Status</f:facet>
+					<h:outputText value="Paid" />
+				</h:column>
+				
+				<h:column>
+					<h:graphicImage value="/images/edit.png"/>
+					<h:graphicImage value="/images/remove.png"/>
+				</h:column>
+			
+		</h:dataTable>
+		
+	</h:form>
+	
+</h:body>
+</html>

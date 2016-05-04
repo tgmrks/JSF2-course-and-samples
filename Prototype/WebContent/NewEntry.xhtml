@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+	<h:outputStylesheet library="css" name="system.css"/>
+	
+	<title>New Entry</title>
+	
+</h:head>
+<h:body>
+	
+	<h1>New Entry</h1>
+	
+	<h:form id="frm">
+	
+		<h:commandButton value="New"/>
+		<h:commandButton value="Consult"/>
+		
+		<h:panelGrid columns="2" styleClass="form-grid" columnClasses="label, field">
+		
+				<h:outputLabel value="Type"/>
+				<h:selectOneRadio>
+					<f:selectItem itemLabel="revenue"/>
+					<f:selectItem itemLabel="expenditure"/>
+				</h:selectOneRadio>
+			
+				<h:outputLabel value="Person"/>
+				<h:selectOneMenu>
+					<f:selectItem itemValue="Dummy"/>
+				</h:selectOneMenu>
+			
+				<h:outputLabel value="Description"/>
+				<h:inputText size="60"/>
+				
+				<h:outputLabel value="Value"/>
+				<h:inputText size="12"/>
+				
+				<h:outputLabel value="Due date"/>
+				<h:inputText size="12"/>
+				
+				<h:outputLabel/>
+				<h:panelGroup>
+					<h:selectBooleanCheckbox/>
+					<h:outputLabel value="Paid"/>
+				</h:panelGroup>
+				
+				<h:outputLabel value="Payment date"/>
+				<h:inputText size="12"/>
+				
+				<h:outputLabel/>
+				<h:commandButton value="Register"/>
+				
+				
+		</h:panelGrid>
+	</h:form>
+	
+</h:body>
+</html>
