@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Stock</title>
+</h:head>
+<h:body>
+	<h:form id="frm">
+	
+		<h:messages showSummary="false" showDetail="true"/>
+	
+		<h:panelGrid columns="2">
+			
+			<h:outputLabel for="cod" value="Cod."/>
+			<h:panelGroup>										<!-- 'label' will be showed in message. If there is any 'label', the 'id' will be showed -->
+				<h:inputText id="cod" value="#{stockBean.item.cod}" label="Product code" required="true">
+					<f:converter converterId="javax.faces.Integer"/> <!-- By default the JSF uses Java Classes converter. But it is possible to define specific converters using the 'converter' component-->
+				</h:inputText>
+				<h:message for="cod" showSummary="true" showDetail="false"/>
+			</h:panelGroup>			
+			
+			<h:outputLabel for="dsc" value="Description"/>
+			<h:panelGroup>		<!-- Customizing required and validation messages -->
+				<h:inputText id="dsc" value="#{stockBean.item.desc}" 		
+								label="Description" required="true"
+								requiredMessage="Please, inform a description"
+								validatorMessage="Description, must have at least 5 caracters">
+					<f:validateLength minimum="5"/> 
+				</h:inputText>
+				<h:message for="dsc" showSummary="true" showDetail="false"/>
+			</h:panelGroup>
+			
+			<h:outputLabel for="prc" value="Price"/>
+			<h:panelGroup>
+				<h:inputText id="prc" value="#{stockBean.item.value}" label="Unity price" required="true">
+					<f:convertNumber minFractionDigits="2" locale="pt_BR"/>
+					<f:validateDoubleRange minimum="0"/>
+				</h:inputText>
+				<h:message for="prc" showSummary="true" showDetail="false"/>
+			</h:panelGroup>
+						
+			<h:outputLabel for="date" value="Date"/>
+			<h:panelGroup>
+				<h:inputText id="date" value="#{stockBean.item.date}" label="Date" required="true">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:inputText>
+				<h:message for="date" showSummary="true" showDetail="false"/>
+			</h:panelGroup>
+					
+			<h:outputLabel/>	
+			<h:commandButton value="Save" action="#{stockBean.insert}"/>
+			
+		</h:panelGrid>
+		
+		<br/><br/>
+		
+		<h:dataTable var="item" value="#{stockBean.itens}" border="1">
+			
+			<h:column>
+				<f:facet name="header">Code</f:facet>
+				<h:outputText value="#{item.cod}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Description</f:facet>
+				<h:outputText value="#{item.desc}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Unity Price</f:facet>
+				<h:outputText value="#{item.value}">
+					<f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR"/>
+				</h:outputText>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Date</f:facet>
+				<h:outputText value="#{item.date}">
+					<f:convertDateTime pattern="dd, MMMM yyyy" locale="pt_BR"/>
+				</h:outputText>
+			</h:column>
+		 
+		</h:dataTable>
+		
+	</h:form>
+</h:body>
+</html>
