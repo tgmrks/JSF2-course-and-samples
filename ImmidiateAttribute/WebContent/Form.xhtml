@@ -50,10 +50,17 @@ xmlns:f="http://java.sun.com/jsf/core">
 				</h:inputText>
 				<h:message for="date" showSummary="true" showDetail="false"/>
 			</h:panelGroup>
-					
-			<h:outputLabel/>	
-			<h:commandButton value="Save" action="#{stockBean.insert}"/>
 			
+			<h:outputLabel/>
+			<h:panelGroup>
+				<h:commandButton value="Save" action="#{stockBean.insert}"/>
+				<h:commandButton value="Clear" action="#{stockBean.clear}" immediate="true"/>
+			</h:panelGroup>					
+			<!-- The 'immediate' attribute tells the framework to execute action into the 2nd phase of the lifecycle, 'Apply Request Values'.
+			Then, jumps to 'Render Response', the 6th/last phase. By doing that, the validation is ignored (3rd phase, 'Process Validation').
+			Without this attribute. When the action 'clear' was called, the validation would be proccessed, and the action 'clear' 
+			would never be executed.  
+			-->
 		</h:panelGrid>
 		
 		<br/><br/>
