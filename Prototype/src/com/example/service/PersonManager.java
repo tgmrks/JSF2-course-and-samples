@@ -9,21 +9,21 @@ import com.example.model.Person;
 
 public class PersonManager {
 
-	private static Map<Integer, Person> person = new HashMap<Integer, Person>();
+	private static Map<Integer, Person> people = new HashMap<Integer, Person>();
 	
 	static{
-		person.put(1, new Person(1, "John Doe"));
-		person.put(2, new Person(2, "Jane Doe"));
-		person.put(3, new Person(3, "Erika Mustermann"));
+		people.put(1, new Person(1, "John Doe"));
+		people.put(2, new Person(2, "Jane Doe"));
+		people.put(3, new Person(3, "Erika Mustermann"));
 	}
 	
 	public List<Person> listAll(){
 		List<Person> all = new ArrayList<Person>();
-		all.addAll(PersonManager.person.values());			
+		all.addAll(PersonManager.people.values());			
 		return all;
 	}
 	
-	public Person searchCod(Integer cod){
-		return person.get(cod);
+	public Person searchForCod(Integer cod){
+		return people.get(cod);
 	}
 }

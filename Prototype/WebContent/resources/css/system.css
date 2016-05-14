@@ -60,3 +60,15 @@ h1 {
 .form-grid .field {
 	padding-right: 5px;
 }
+
+.form-messages {
+	padding-left: 20px;
+}
+
+.form-messages .error {
+	color: #e81f1f;
+}
+
+.form-messages .info {
+	color: #156b2a;
+}

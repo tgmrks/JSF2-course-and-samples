@@ -12,7 +12,7 @@ public class Entry implements Serializable{
 	private Double value;
 	private Date dueDate;
 	private boolean paid;
-	private Date paidDate;
+	private Date paimentDate;
 	public Integer getCod() {
 		return cod;
 	}
@@ -55,13 +55,13 @@ public class Entry implements Serializable{
 	public void setPaid(boolean paid) {
 		this.paid = paid;
 	}
-	public Date getPaidDate() {
-		return paidDate;
-	}
-	public void setPaidDate(Date paidDate) {
-		this.paidDate = paidDate;
-	}
 	
+	public Date getPaimentDate() {
+		return paimentDate;
+	}
+	public void setPaimentDate(Date paimentDate) {
+		this.paimentDate = paimentDate;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
