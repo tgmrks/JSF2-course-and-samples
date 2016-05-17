@@ -3,6 +3,11 @@ package com.example.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.annotations.Entity;
+import org.hibernate.annotations.Table;
+
+@Entity
+@Table
 public class Entry implements Serializable{
 
 	private Integer cod;
