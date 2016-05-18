@@ -24,7 +24,7 @@ public class TestHiber {
 				System.out.println("TEST: " + p.getCod() + " - " + p.getName());
 			}
 		}
-					
+						
 		session.close();
 
 	}
