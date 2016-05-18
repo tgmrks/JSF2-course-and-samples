@@ -3,11 +3,18 @@ package com.example.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.hibernate.annotations.Entity;
-import org.hibernate.annotations.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name="entry")
 public class Entry implements Serializable{
 
 	private Integer cod;
@@ -18,18 +25,28 @@ public class Entry implements Serializable{
 	private Date dueDate;
 	private boolean paid;
 	private Date paimentDate;
+	
+	@Id
+	@GeneratedValue
+	@Column(name="cod")
 	public Integer getCod() {
 		return cod;
 	}
 	public void setCod(Integer cod) {
 		this.cod = cod;
 	}
+	
+	@Enumerated(EnumType.STRING)//indicate that, in our code this represents a Enum
+	@Column(name="type")
 	public EntryType getType() {
 		return type;
 	}
 	public void setType(EntryType type) {
 		this.type = type;
 	}
+	
+	@ManyToMany
+	@JoinColumn(name="cod_person")
 	public Person getPerson() {
 		return person;
 	}
@@ -48,6 +65,8 @@ public class Entry implements Serializable{
 	public void setValue(Double value) {
 		this.value = value;
 	}
+	
+	@Column(name="due_date")
 	public Date getDueDate() {
 		return dueDate;
 	}
@@ -61,12 +80,14 @@ public class Entry implements Serializable{
 		this.paid = paid;
 	}
 	
+	@Column(name="paiement_date")
 	public Date getPaimentDate() {
 		return paimentDate;
 	}
 	public void setPaimentDate(Date paimentDate) {
 		this.paimentDate = paimentDate;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

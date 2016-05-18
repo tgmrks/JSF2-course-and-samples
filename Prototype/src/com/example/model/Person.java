@@ -2,6 +2,19 @@ package com.example.model;
 
 import java.io.Serializable;
 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="person") //when class and table have the same name, the parameter 'name' is not required
 public class Person implements Serializable{
 
 	private Integer cod;
@@ -17,6 +30,9 @@ public class Person implements Serializable{
 		this.name = name;
 	}
 
+	@Id
+	@GeneratedValue 
+	@Column(name="cod")
 	public Integer getCod() {
 		return cod;
 	}
@@ -25,6 +41,7 @@ public class Person implements Serializable{
 		this.cod = cod;
 	}
 
+	@Column(name="name")
 	public String getName() {
 		return name;
 	}

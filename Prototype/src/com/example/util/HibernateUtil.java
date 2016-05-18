@@ -16,13 +16,12 @@ public class HibernateUtil {
 			cfg.configure(); //it will read the configuration file .xml (hibernate.cfg.xml)
 			
 			ServiceRegistry servReg = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
-			
 			sessionFac = cfg.buildSessionFactory(servReg); //fetch sessonfactory for our sessions
-
+			
 		} catch (Throwable e) {
 			throw new ExceptionInInitializerError(e);
-		}
-				
+		}	
+//		catch (HibernateException e) { throw new HibernateException(e);
 	}
 	
 	public static Session getSession(){
