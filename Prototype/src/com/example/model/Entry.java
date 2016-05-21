@@ -10,7 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,7 +28,6 @@ public class Entry implements Serializable{
 	
 	@Id
 	@GeneratedValue
-	@Column(name="cod")
 	public Integer getCod() {
 		return cod;
 	}
@@ -45,7 +44,7 @@ public class Entry implements Serializable{
 		this.type = type;
 	}
 	
-	@ManyToMany
+	@ManyToOne
 	@JoinColumn(name="cod_person")
 	public Person getPerson() {
 		return person;
@@ -80,7 +79,7 @@ public class Entry implements Serializable{
 		this.paid = paid;
 	}
 	
-	@Column(name="paiement_date")
+	@Column(name="paiement_date	")
 	public Date getPaimentDate() {
 		return paimentDate;
 	}
@@ -112,5 +111,6 @@ public class Entry implements Serializable{
 			return false;
 		return true;
 	}
+
 	
 }

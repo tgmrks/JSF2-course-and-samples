@@ -23,7 +23,7 @@ public class HibernateUtil {
 			
 			Configuration cfg = new Configuration();
 			cfg.addAnnotatedClass(Person.class);
-			//cfg.addAnnotatedClass(Entry.class);
+			cfg.addAnnotatedClass(Entry.class);
 			
 			cfg.configure(); //it will read the configuration file .xml (hibernate.cfg.xml)
 			ServiceRegistry servReg = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();

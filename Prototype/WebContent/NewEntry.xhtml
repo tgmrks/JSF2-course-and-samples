@@ -31,7 +31,7 @@ xmlns:f="http://java.sun.com/jsf/core">
 					<f:selectItems value="#{newEntryBean.entryTypes}"
 						var="type" itemLabel="#{type.description}"
 						itemValue="#{type}" 
-					/> <!-- itemValue="#{entryType}" ...send the entire obj other than the description only-->					
+					/> 					
 				</h:selectOneRadio>
 							
 				<h:outputLabel value="Person"/>
@@ -40,7 +40,7 @@ xmlns:f="http://java.sun.com/jsf/core">
 					<f:selectItems value="#{newEntryBean.people}"
 						var="person" itemValue="#{person}" itemLabel="#{person.name}"/>
 				</h:selectOneMenu>
-			
+							
 				<h:outputLabel value="Description"/>
 				<h:inputText size="60" value="#{newEntryBean.entry.description}" required="true" label="Description"/>
 				
@@ -58,13 +58,12 @@ xmlns:f="http://java.sun.com/jsf/core">
 				<h:outputLabel/>
 				<h:panelGroup>
 					<h:selectBooleanCheckbox id="chkPaid" value="#{newEntryBean.entry.paid}"
-					immediate="true" valueChangeListener="#{newEntryBean.entryPaidChange}"
-					onchange="submit();"/>
+						immediate="true" valueChangeListener="#{newEntryBean.entryPaidChange}"
+						onchange="submit();"/>
 					<h:outputLabel value="Paid" for="chkPaid"/>
 				</h:panelGroup>
 				
-				
-				<h:outputLabel value="Payment date" rendered="#{newEntry.entry.paid}"/>
+				<h:outputLabel value="Payment date" rendered="#{newEntryBean.entry.paid}"/>
 				<h:inputText size="12" value="#{newEntryBean.entry.paimentDate}" label="Paiment Date"
 					rendered="#{newEntryBean.entry.paid}">
 					<f:convertDateTime pattern="dd/MM/yyyy"/>
@@ -74,7 +73,7 @@ xmlns:f="http://java.sun.com/jsf/core">
 				</h:inputText>
 				
 				<h:outputLabel/>
-				<h:commandButton value="Register" action="#{newEntryBean.Register}"/>
+				<h:commandButton value="Register" action="#{newEntryBean.register}"/>
 				
 		</h:panelGrid>
 		<!-- For default, valitadors won't execute if any information is provided to the component. 

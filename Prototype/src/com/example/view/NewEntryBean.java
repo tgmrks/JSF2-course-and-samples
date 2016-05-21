@@ -11,10 +11,14 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+
 import com.example.model.Entry;
 import com.example.model.EntryType;
 import com.example.model.Person;
-import com.example.service.PersonManager;
+import com.example.util.HibernateUtil;
 
 @ManagedBean
 @ViewScoped
@@ -23,10 +27,16 @@ public class NewEntryBean implements Serializable{
 	private List<Person> people = new ArrayList<Person>();
 	private Entry entry = new Entry();
 	
+	@SuppressWarnings("unchecked")
 	@PostConstruct //called after the managedBean is created 
 	public void init(){
-		PersonManager mng = new PersonManager();
-		this.people = mng.listAll();
+		Session session = HibernateUtil.getSession();
+		
+		this.people = session.createCriteria(Person.class)
+				.addOrder(Order.asc("name"))
+					.list();
+		
+		session.close();
 	}
 
 	public void entryPaidChange(ValueChangeEvent event){
@@ -35,14 +45,14 @@ public class NewEntryBean implements Serializable{
 		FacesContext.getCurrentInstance().renderResponse();
 	}
 	
-	public void Register(){
-		System.out.println("Type: " + this.entry.getType());
-		//System.out.println("Pessoa: " + this.entry.getPerson().getName());
-		System.out.println("Description: " + this.entry.getDescription());
-		System.out.println("Value: " + this.entry.getValue());
-		System.out.println("Due Date: " + this.entry.getDueDate());
-		System.out.println("Paid: " + this.entry.isPaid());
-		System.out.println("Paid Date: " + this.entry.getPaimentDate());
+	public void register(){
+		Session session = HibernateUtil.getSession();
+		//merge: update or save
+		Transaction trx = session.beginTransaction();
+		//session.merge(this.entry);
+		//session.save(this.entry);
+		trx.commit();
+		session.close();
 		
 		this.entry = new Entry();
 		
