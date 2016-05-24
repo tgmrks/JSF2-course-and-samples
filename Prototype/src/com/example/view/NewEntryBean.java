@@ -51,6 +51,7 @@ public class NewEntryBean implements Serializable{
 		Transaction trx = session.beginTransaction();
 		//session.merge(this.entry);
 		//session.save(this.entry);
+		session.saveOrUpdate(this.entry);
 		trx.commit();
 		session.close();
 		
