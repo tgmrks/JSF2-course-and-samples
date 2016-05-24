@@ -23,37 +23,43 @@ xmlns:f="http://java.sun.com/jsf/core">
 			columnClasses="type, person, description, value, duedate, paiddate, status, actions">
 			
 				<h:column>
-					<h:graphicImage value="/images/expenditure.png"/>
+					<h:graphicImage value="/images/expenditure.png" rendered="#{entry.type eq 'EXPENDITURE'}"/>
+					<h:graphicImage value="/images/income.png" rendered="#{entry.type eq 'INCOME'}"/>
 				</h:column>
 				
 				<h:column>
 					<f:facet name="header">Person</f:facet>
-					<h:outputText value="Dummy"/>
+					<h:outputText value="#{entry.person.name}"/>
 				</h:column>
 				
 				<h:column>
 					<f:facet name="header">Description</f:facet>
-					<h:outputText value="some bill paid"/>
+					<h:outputText value="#{entry.description}"/>
 				</h:column>
 				
 				<h:column>
 					<f:facet name="header">Value</f:facet>
-					<h:outputText value="$ 500,00" styleClass="expenditure"/>
+					<h:outputText value="#{entry.value}" styleClass="#{entry.type.toString().toLowerCase()}"/>
 				</h:column>
 				
 				<h:column>
 					<f:facet name="header">Due Date</f:facet>
-					<h:outputText value="05/03/2016"/>
+					<h:outputText value="#{entry.dueDate}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
 				</h:column>
 				
 				<h:column>
 					<f:facet name="header">Paid Date</f:facet>					
-					<h:outputText value="05/03/2016"/>
+					<h:outputText value="#{entry.paimentDate}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
 				</h:column>
 				
 				<h:column>
 					<f:facet name="header">Status</f:facet>
-					<h:outputText value="Paid" />
+					<h:outputText value="Paid" rendered="#{entry.paid}"/>
+					<h:outputText value="Open" rendered="#{not entry.paid}"/>
 				</h:column>
 				
 				<h:column>

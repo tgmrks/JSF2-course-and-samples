@@ -69,7 +69,7 @@ xmlns:f="http://java.sun.com/jsf/core">
 					<f:convertDateTime pattern="dd/MM/yyyy"/>
 					<f:validator validatorId="com.example.validator.ConditionalRequiredValidator"/>
 					<f:validator validatorId="com.example.validator.FutureDateValidator"/>
-					<f:attribute name="checked" value="newEntryBean.entry.paid"/>
+					<f:attribute name="checked" value="#{newEntryBean.entry.paid}"/>
 				</h:inputText>
 				
 				<h:outputLabel/>

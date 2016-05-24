@@ -49,9 +49,9 @@ public class NewEntryBean implements Serializable{
 		Session session = HibernateUtil.getSession();
 		//merge: update or save
 		Transaction trx = session.beginTransaction();
-		//session.merge(this.entry);
+		session.merge(this.entry);
 		//session.save(this.entry);
-		session.saveOrUpdate(this.entry);
+		//session.saveOrUpdate(this.entry);
 		trx.commit();
 		session.close();
 		

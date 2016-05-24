@@ -6,19 +6,28 @@ import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+
+import com.example.model.Entry;
+import com.example.util.HibernateUtil;
+
 @ManagedBean
 public class ConsultBalanceBean {
 	
-	private List<String> entries = new ArrayList<String>();
+	private List<Entry> entries = new ArrayList<Entry>();
 
+	@SuppressWarnings("unchecked")
 	@PostConstruct 
 	public void initialize() {
-		for (int i = 0; i < 20; i++) {
-			entries.add("");
-		}
+		Session session = HibernateUtil.getSession();
+		
+		this.entries = session.createCriteria(Entry.class)
+				.addOrder(Order.desc("dueDate"))
+				.list();
 	}
 	
-	public List<String> getEntries() {
+	public List<Entry> getEntries() {
 		return entries;
 	}
 		
