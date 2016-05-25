@@ -1,0 +1,44 @@
+td.type { 
+	width: 20px;
+	text-align: center;
+}
+
+td.person {
+	width: 200px;
+}
+
+td.descrition {
+}
+
+td.value { 
+	width: 100px;
+	text-align: center;
+}
+
+td.duedate { 
+	width: 100px;
+	text-align: center;
+}
+
+td.paiddate { 
+	width: 100px;
+	text-align: center;
+}
+
+td.status { 
+	width: 80px;
+	text-align: center;
+}
+
+td.actions { 
+	width: 40px;
+	text-align: center;
+}
+
+.grid .income {
+	color: #0000ff;
+}
+
+.grid .expenditure {
+	color: #c23030;
+}

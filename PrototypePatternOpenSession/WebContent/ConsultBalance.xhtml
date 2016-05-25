@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<h:outputStylesheet library="css" name="system.css"/>
+	<h:outputStylesheet library="css" name="consult-balance.css"/>
+	
+	<title>Balance</title>
+</h:head>
+<h:body>
+	<h1>Simple Personal Financial Balance Sheet</h1>	
+
+	<h:form id="frm">
+		<h:commandButton value="New Balance"/>
+		
+		<h:messages showSummary="true" showDetail="false" 
+			styleClass="form-messages" errorClass="error" infoClass="info"/>
+		
+		
+		<h:dataTable var="entry" value="#{consultBalanceBean.entries}" 
+			width="100%" styleClass="grid"  headerClass="header" rowClasses="line-odd, line-even"
+			columnClasses="type, person, description, value, duedate, paiddate, status, actions">
+			
+				<h:column>
+					<h:graphicImage value="/images/expenditure.png" rendered="#{entry.type eq 'EXPENDITURE'}"/>
+					<h:graphicImage value="/images/income.png" rendered="#{entry.type eq 'INCOME'}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Person</f:facet>
+					<h:outputText value="#{entry.person.name}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Description</f:facet>
+					<h:outputText value="#{entry.description}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Value</f:facet>
+					<h:outputText value="#{entry.value}" styleClass="#{entry.type.toString().toLowerCase()}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Due Date</f:facet>
+					<h:outputText value="#{entry.dueDate}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Paid Date</f:facet>					
+					<h:outputText value="#{entry.paimentDate}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Status</f:facet>
+					<h:outputText value="Paid" rendered="#{entry.paid}"/>
+					<h:outputText value="Open" rendered="#{not entry.paid}"/>
+				</h:column>
+				
+				<h:column>
+					<h:graphicImage value="/images/edit.png"/>
+					<h:commandLink action="#{consultBalanceBean.remove}">
+						<h:graphicImage value="/images/remove.png"/>
+						<f:setPropertyActionListener target="#{consultBalanceBean.selectedEntry}" value="#{entry}"/>
+					</h:commandLink>
+				</h:column>
+			
+		</h:dataTable>
+		
+	</h:form>
+	
+</h:body>
+</html>

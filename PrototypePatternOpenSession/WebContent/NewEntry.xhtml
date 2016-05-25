@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+	<h:outputStylesheet library="css" name="system.css"/>
+	
+	<title>New Entry</title>
+	
+</h:head>
+<h:body>
+	
+	<h1>New Entry</h1>
+	
+	<h:form id="frm">
+	
+		<h:button value="New" outcome="NewEntry"/>
+		<h:button value="Consult" outcome="ConsultBalance"/>
+		
+		<h:messages showSummary="true" showDetail="false" 
+			styleClass="form-messages" errorClass="error" infoClass="info"/>
+		
+		<h:panelGrid columns="2" styleClass="form-grid" columnClasses="label, field">
+		
+				<h:outputLabel value="Type"/>
+				<h:selectOneRadio value="#{newEntryBean.entry.type}" required="true" label="Entry Type">
+					<f:selectItems value="#{newEntryBean.entryTypes}"
+						var="type" itemLabel="#{type.description}"
+						itemValue="#{type}" 
+					/> 					
+				</h:selectOneRadio>
+							
+				<h:outputLabel value="Person"/>
+				<h:selectOneMenu value="#{newEntryBean.entry.person}" required="true" label="Person">	
+					<f:selectItem itemLabel="Select person" noSelectionOption="true" />
+					<f:selectItems value="#{newEntryBean.people}"
+						var="person" itemValue="#{person}" itemLabel="#{person.name}"/>
+				</h:selectOneMenu>
+							
+				<h:outputLabel value="Description"/>
+				<h:inputText size="60" value="#{newEntryBean.entry.description}" required="true" label="Description"/>
+				
+				<h:outputLabel value="Value"/>
+				<h:inputText size="12" value="#{newEntryBean.entry.value}" required="true" label="Value">
+					<f:convertNumber locale="pt_BR" maxFractionDigits="2" minFractionDigits="2"/>
+					<f:validateDoubleRange minimum="0"/>
+				</h:inputText>
+				
+				<h:outputLabel value="Due date"/>
+				<h:inputText size="12" value="#{newEntryBean.entry.dueDate}" required="true" label="Due Date">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:inputText>
+				
+				<h:outputLabel/>
+				<h:panelGroup>
+					<h:selectBooleanCheckbox id="chkPaid" value="#{newEntryBean.entry.paid}"
+						immediate="true" valueChangeListener="#{newEntryBean.entryPaidChange}"
+						onchange="submit();"/>
+					<h:outputLabel value="Paid" for="chkPaid"/>
+				</h:panelGroup>
+				
+				<h:outputLabel value="Payment date" rendered="#{newEntryBean.entry.paid}"/>
+				<h:inputText size="12" value="#{newEntryBean.entry.paimentDate}" label="Paiment Date"
+					rendered="#{newEntryBean.entry.paid}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+					<f:validator validatorId="com.example.validator.ConditionalRequiredValidator"/>
+					<f:validator validatorId="com.example.validator.FutureDateValidator"/>
+					<f:attribute name="checked" value="#{newEntryBean.entry.paid}"/>
+				</h:inputText>
+				
+				<h:outputLabel/>
+				<h:commandButton value="Register" action="#{newEntryBean.register}"/>
+				
+		</h:panelGrid>
+		<!-- For default, valitadors won't execute if any information is provided to the component. 
+				It can be changed by adding ...VALIDATE_EMPTY_FIELDS into the configuration file web.xml-->
+	</h:form>
+	
+</h:body>
+</html>
