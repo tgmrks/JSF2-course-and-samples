@@ -8,8 +8,10 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
+import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -18,6 +20,7 @@ import org.hibernate.criterion.Order;
 import com.example.model.Entry;
 import com.example.model.EntryType;
 import com.example.model.Person;
+import com.example.util.FacesUtil;
 import com.example.util.HibernateUtil;
 
 @ManagedBean
@@ -30,13 +33,11 @@ public class NewEntryBean implements Serializable{
 	@SuppressWarnings("unchecked")
 	@PostConstruct //called after the managedBean is created 
 	public void init(){
-		Session session = HibernateUtil.getSession();
+		Session session = (Session) FacesUtil.getRequestAttribute("session"); 
 		
 		this.people = session.createCriteria(Person.class)
 				.addOrder(Order.asc("name"))
 					.list();
-		
-		session.close();
 	}
 
 	public void entryPaidChange(ValueChangeEvent event){
@@ -46,14 +47,8 @@ public class NewEntryBean implements Serializable{
 	}
 	
 	public void register(){
-		Session session = HibernateUtil.getSession();
-		//merge: update or save
-		Transaction trx = session.beginTransaction();
+		Session session = (Session) FacesUtil.getRequestAttribute("session");
 		session.merge(this.entry);
-		//session.save(this.entry);
-		//session.saveOrUpdate(this.entry);
-		trx.commit();
-		session.close();
 		
 		this.entry = new Entry();
 		

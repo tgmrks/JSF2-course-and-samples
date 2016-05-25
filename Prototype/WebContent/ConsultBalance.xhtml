@@ -18,6 +18,10 @@ xmlns:f="http://java.sun.com/jsf/core">
 	<h:form id="frm">
 		<h:commandButton value="New Balance"/>
 		
+		<h:messages showSummary="true" showDetail="false" 
+			styleClass="form-messages" errorClass="error" infoClass="info"/>
+		
+		
 		<h:dataTable var="entry" value="#{consultBalanceBean.entries}" 
 			width="100%" styleClass="grid"  headerClass="header" rowClasses="line-odd, line-even"
 			columnClasses="type, person, description, value, duedate, paiddate, status, actions">
@@ -64,7 +68,10 @@ xmlns:f="http://java.sun.com/jsf/core">
 				
 				<h:column>
 					<h:graphicImage value="/images/edit.png"/>
-					<h:graphicImage value="/images/remove.png"/>
+					<h:commandLink action="#{consultBalanceBean.remove}">
+						<h:graphicImage value="/images/remove.png"/>
+						<f:setPropertyActionListener target="#{consultBalanceBean.selectedEntry}" value="#{entry}"/>
+					</h:commandLink>
 				</h:column>
 			
 		</h:dataTable>
