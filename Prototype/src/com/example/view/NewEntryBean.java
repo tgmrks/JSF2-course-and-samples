@@ -8,36 +8,30 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
-import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Order;
 
 import com.example.model.Entry;
 import com.example.model.EntryType;
 import com.example.model.Person;
-import com.example.util.FacesUtil;
-import com.example.util.HibernateUtil;
+import com.example.repository.EntryRepository;
+import com.example.repository.PersonRepository;
+import com.example.util.Repositories;
 
 @ManagedBean
 @ViewScoped
 public class NewEntryBean implements Serializable{
 	
+	private Repositories repositories = new Repositories();
 	private List<Person> people = new ArrayList<Person>();
 	private Entry entry = new Entry();
 	
 	@SuppressWarnings("unchecked")
 	@PostConstruct //called after the managedBean is created 
 	public void init(){
-		Session session = (Session) FacesUtil.getRequestAttribute("session"); 
-		
-		this.people = session.createCriteria(Person.class)
-				.addOrder(Order.asc("name"))
-					.list();
+		PersonRepository personRepository = this.repositories.getPeople();
+		this.people = personRepository.listAll();
 	}
 
 	public void entryPaidChange(ValueChangeEvent event){
@@ -47,8 +41,8 @@ public class NewEntryBean implements Serializable{
 	}
 	
 	public void register(){
-		Session session = (Session) FacesUtil.getRequestAttribute("session");
-		session.merge(this.entry);
+		EntryRepository entryRepository = this.repositories.getEntries();
+		entryRepository.save(this.entry);
 		
 		this.entry = new Entry();
 		

@@ -6,30 +6,25 @@ import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Order;
-
+import com.example.infrastructure.HibernateEntryRepository;
 import com.example.model.Entry;
+import com.example.repository.EntryRepository;
 import com.example.util.FacesUtil;
-import com.example.util.HibernateUtil;
+import com.example.util.Repositories;
 
 @ManagedBean
 public class ConsultBalanceBean {
 	
+	private Repositories repositories = new Repositories();
 	private Entry selectedEntry;
 	private List<Entry> entries = new ArrayList<Entry>();
 
 	@SuppressWarnings("unchecked")
 	@PostConstruct 
 	public void initialize() {
-		Session session = (Session) FacesUtil.getRequestAttribute("session");
-		
-		this.entries = session.createCriteria(Entry.class)
-				.addOrder(Order.desc("dueDate"))
-				.list();
+		EntryRepository entryRepository = this.repositories.getEntries();
+		this.entries = entryRepository.listAll();
 			}
 	
 	public void remove(){
@@ -37,11 +32,10 @@ public class ConsultBalanceBean {
 			FacesUtil.addMsg(FacesMessage.SEVERITY_ERROR, "Can't be removed");
 		}
 		else{
-			Session session = (Session) FacesUtil.getRequestAttribute("session");
-			session.delete(this.selectedEntry);
+			EntryRepository entryRepository = this.repositories.getEntries();
+			entryRepository.remove(this.selectedEntry);
 			
 			this.initialize();
-			
 			FacesUtil.addMsg(FacesMessage.SEVERITY_INFO, "Removed Successfully!");	
 		}
 		
