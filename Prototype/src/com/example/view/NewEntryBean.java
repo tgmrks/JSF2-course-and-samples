@@ -11,12 +11,14 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 
-
 import com.example.model.Entry;
 import com.example.model.EntryType;
 import com.example.model.Person;
 import com.example.repository.EntryRepository;
 import com.example.repository.PersonRepository;
+import com.example.service.BusinessRuleException;
+import com.example.service.EntryManager;
+import com.example.util.FacesUtil;
 import com.example.util.Repositories;
 
 @ManagedBean
@@ -41,15 +43,15 @@ public class NewEntryBean implements Serializable{
 	}
 	
 	public void register(){
-		EntryRepository entryRepository = this.repositories.getEntries();
-		entryRepository.save(this.entry);
+		EntryManager entryManager = new EntryManager(this.repositories.getEntries());
+		try {
+			entryManager.save(this.entry);
+			this.entry = new Entry();
+			FacesUtil.addMsg(FacesMessage.SEVERITY_INFO, "Successfully registered!");
+		} catch (BusinessRuleException e) {
+			FacesUtil.addMsg(FacesMessage.SEVERITY_ERROR, e.getMessage());
+		}
 		
-		this.entry = new Entry();
-		
-		//add message to the queue
-		String msg = "Successfully registered!";
-		FacesContext.getCurrentInstance().addMessage(null, 
-				new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
 	}
 	
 	public EntryType[] getEntryTypes(){

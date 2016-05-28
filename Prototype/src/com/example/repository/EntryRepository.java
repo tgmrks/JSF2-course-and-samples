@@ -10,4 +10,5 @@ public interface EntryRepository {
 	public Entry findByCod();
 	public Entry save(Entry entry);
 	public void remove(Entry entry);
+	public Entry alikeEntry(Entry entry);
 }

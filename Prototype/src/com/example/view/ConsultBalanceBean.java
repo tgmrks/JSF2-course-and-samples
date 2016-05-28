@@ -10,6 +10,8 @@ import javax.faces.bean.ManagedBean;
 import com.example.infrastructure.HibernateEntryRepository;
 import com.example.model.Entry;
 import com.example.repository.EntryRepository;
+import com.example.service.BusinessRuleException;
+import com.example.service.EntryManager;
 import com.example.util.FacesUtil;
 import com.example.util.Repositories;
 
@@ -28,15 +30,15 @@ public class ConsultBalanceBean {
 			}
 	
 	public void remove(){
-		if(this.selectedEntry.isPaid()){
-			FacesUtil.addMsg(FacesMessage.SEVERITY_ERROR, "Can't be removed");
-		}
-		else{
-			EntryRepository entryRepository = this.repositories.getEntries();
-			entryRepository.remove(this.selectedEntry);
+		EntryManager entryManager = new EntryManager(this.repositories.getEntries());
+		try {
+			entryManager.remove(this.selectedEntry);
 			
 			this.initialize();
-			FacesUtil.addMsg(FacesMessage.SEVERITY_INFO, "Removed Successfully!");	
+			FacesUtil.addMsg(FacesMessage.SEVERITY_INFO, "Removed Successfully!");
+		} 
+		catch (BusinessRuleException e) {
+			FacesUtil.addMsg(FacesMessage.SEVERITY_ERROR, e.getMessage());
 		}
 		
 	}
