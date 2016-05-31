@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14613431450680" configfile="/ImplicitNavigation/WebContent/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14613431450680" configfile="/ExplicitNavigation/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" id="pf14647287924900" outlinks="pf14647287924911" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="Products.xhtml" id="pf14647287924912" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14647296305843 pf14647296305844" inlinks="pf14647287924911" path="/Products.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="AboutForm.xhtml" id="pf14647296305845" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" inlinks="pf14647296305843" path="/AboutForm.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="About.xhtml" id="pf14647296305846" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" inlinks="pf14647296305844" path="/About.xhtml"/>
+  <links id="pf14647287924911" target="pf14647287924912" source="pf14647287924900" outcome="home" redirect="true"/>
+  <links id="pf14647296305843" target="pf14647296305845" source="pf14647287924912" outcome="products" redirect="true"/>
+  <links id="pf14647296305844" target="pf14647296305846" source="pf14647287924912" outcome="no-products" redirect="true"/>
+</pageflow:Pageflow>

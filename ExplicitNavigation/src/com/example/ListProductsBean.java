@@ -26,9 +26,9 @@ public class ListProductsBean {
 	
 	public String getAbout(){
 		if(this.products.isEmpty())
-			return "About?faces-redirect=true";
+			return "no-products";
 		else
-			return "AboutForm?faces-redirect=true";
+			return "products";
 	}
 
 	public Product getProduct() {
