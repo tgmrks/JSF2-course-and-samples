@@ -62,8 +62,25 @@ public class NewEntryBean implements Serializable{
 		return entry;
 	}
 
+	public void setEntry(Entry entry) throws CloneNotSupportedException {
+		this.entry = entry;
+		if(this.entry == null){
+			this.entry = new Entry();
+		}
+		else {
+			this.entry = (Entry) entry.clone(); 
+			//The clone obj is disconnected from database, 
+			//guaranteeing that the edited obj won't be sent to db before validation
+			//Therefore, the origianl obj is direct connected to DB and shouldn't be used for data update.
+		}
+	}
+
 	public List<Person> getPeople() {
 		return people;
+	}
+	
+	public boolean isEditing(){
+		return this.entry.getCod() != null; 
 	}
 	
 }

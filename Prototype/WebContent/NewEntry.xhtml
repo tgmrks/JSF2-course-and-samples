@@ -4,17 +4,22 @@
 xmlns:h="http://java.sun.com/jsf/html"
 xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:f="http://java.sun.com/jsf/core">
+
+<f:metadata>
+	<f:viewParam name="code" value="#{newEntryBean.entry}"/>
+</f:metadata>
+
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
 	<h:outputStylesheet library="css" name="system.css"/>
 	
-	<title>New Entry</title>
+	<title>#{newEntryBean.editing ? 'Editing Entry' : 'New Entry'}</title>
 	
 </h:head>
 <h:body>
 	
-	<h1>New Entry</h1>
+	<h1>#{newEntryBean.editing ? 'Editing Entry' : 'New Entry'}</h1>
 	
 	<h:form id="frm">
 	

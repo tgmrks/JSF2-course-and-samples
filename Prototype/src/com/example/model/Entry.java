@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="entry")
-public class Entry implements Serializable{
+public class Entry implements Serializable, Cloneable{
 
 	private Integer cod;
 	private EntryType type;
@@ -113,5 +113,8 @@ public class Entry implements Serializable{
 		return true;
 	}
 
-	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 }

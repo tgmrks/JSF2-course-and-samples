@@ -16,7 +16,7 @@ xmlns:f="http://java.sun.com/jsf/core">
 	<h1>Simple Personal Financial Balance Sheet</h1>	
 
 	<h:form id="frm">
-		<h:button value="New Balance" outcome="NewEntry"/>
+		<h:button value="New Entry" outcome="NewEntry"/>
 		
 		<h:messages showSummary="true" showDetail="false" 
 			styleClass="form-messages" errorClass="error" infoClass="info"/>
@@ -67,7 +67,10 @@ xmlns:f="http://java.sun.com/jsf/core">
 				</h:column>
 				
 				<h:column>
-					<h:graphicImage value="/images/edit.png"/>
+					<h:link outcome="NewEntry">
+						<h:graphicImage value="/images/edit.png"/>
+						<f:param name="code" value="#{entry.cod}"/>
+					</h:link>
 					<h:commandLink action="#{consultBalanceBean.remove}">
 						<h:graphicImage value="/images/remove.png"/>
 						<f:setPropertyActionListener target="#{consultBalanceBean.selectedEntry}" value="#{entry}"/>

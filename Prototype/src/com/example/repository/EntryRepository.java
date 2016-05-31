@@ -7,7 +7,7 @@ import com.example.model.Entry;
 public interface EntryRepository {
 	
 	public List<Entry> listAll();
-	public Entry findByCod();
+	public Entry findByCod(Integer cod);
 	public Entry save(Entry entry);
 	public void remove(Entry entry);
 	public Entry alikeEntry(Entry entry);

@@ -26,9 +26,8 @@ public class HibernateEntryRepository implements EntryRepository {
 	}
 
 	@Override
-	public Entry findByCod() {
-		// TODO Auto-generated method stub
-		return null;
+	public Entry findByCod(Integer cod) {
+		return (Entry) session.get(Entry.class, cod);
 	}
 
 	@Override
