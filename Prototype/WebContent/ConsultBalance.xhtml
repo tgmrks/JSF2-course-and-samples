@@ -1,19 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:h="http://java.sun.com/jsf/html"
-xmlns:ui="http://java.sun.com/jsf/facelets"
-xmlns:f="http://java.sun.com/jsf/core">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<ui:composition template="/template/LayoutPattern.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 
-	<h:outputStylesheet library="css" name="system.css"/>
+	<ui:define name="title">Balance</ui:define>
+
+	<ui:define name="content">
 	<h:outputStylesheet library="css" name="consult-balance.css"/>
 	
-	<title>Balance</title>
-</h:head>
-<h:body>
-	<h1>Simple Personal Financial Balance Sheet</h1>	
+			<h1>Simple Personal Balance Sheet</h1>	
 
 	<h:form id="frm">
 		<h:button value="New Entry" outcome="NewEntry"/>
@@ -74,12 +70,17 @@ xmlns:f="http://java.sun.com/jsf/core">
 					<h:commandLink action="#{consultBalanceBean.remove}">
 						<h:graphicImage value="/images/remove.png"/>
 						<f:setPropertyActionListener target="#{consultBalanceBean.selectedEntry}" value="#{entry}"/>
+						<f:ajax render="@form"/>
 					</h:commandLink>
 				</h:column>
 			
 		</h:dataTable>
 		
 	</h:form>
+	</ui:define>
 	
-</h:body>
-</html>
+</ui:composition>
+
+
+
+

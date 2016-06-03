@@ -1,25 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:h="http://java.sun.com/jsf/html"
-xmlns:ui="http://java.sun.com/jsf/facelets"
-xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition template="/template/LayoutPattern.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 
-<f:metadata>
-	<f:viewParam name="code" value="#{newEntryBean.entry}"/>
-</f:metadata>
-
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	
-	<h:outputStylesheet library="css" name="system.css"/>
-	
-	<title>#{newEntryBean.editing ? 'Editing Entry' : 'New Entry'}</title>
-	
-</h:head>
-<h:body>
-	
-	<h1>#{newEntryBean.editing ? 'Editing Entry' : 'New Entry'}</h1>
+	<ui:define name="title">#{newEntryBean.editing ? 'Editing Entry' : 'New Entry'}</ui:define>
+		
+	<ui:define name="content">
+		<f:metadata>
+			<f:viewParam name="code" value="#{newEntryBean.entry}"/>
+		</f:metadata>
+		
+		
+		<h1>#{newEntryBean.editing ? 'Editing Entry' : 'New Entry'}</h1>
 	
 	<h:form id="frm">
 	
@@ -29,7 +22,7 @@ xmlns:f="http://java.sun.com/jsf/core">
 		<h:messages showSummary="true" showDetail="false" 
 			styleClass="form-messages" errorClass="error" infoClass="info"/>
 		
-		<h:panelGrid columns="2" styleClass="form-grid" columnClasses="label, field">
+		<h:panelGrid columns="2" styleClass="form-grid" columnClasses="label, field" id="panel">
 		
 				<h:outputLabel value="Type"/>
 				<h:selectOneRadio value="#{newEntryBean.entry.type}" required="true" label="Entry Type">
@@ -64,7 +57,9 @@ xmlns:f="http://java.sun.com/jsf/core">
 				<h:panelGroup>
 					<h:selectBooleanCheckbox id="chkPaid" value="#{newEntryBean.entry.paid}"
 						immediate="true" valueChangeListener="#{newEntryBean.entryPaidChange}"
-						onchange="submit();"/>
+						onchange="jsf.ajax.request(this, event, {
+							execute: '@form', render: 'frm:panel'
+						})"/>
 					<h:outputLabel value="Paid" for="chkPaid"/>
 				</h:panelGroup>
 				
@@ -78,12 +73,20 @@ xmlns:f="http://java.sun.com/jsf/core">
 				</h:inputText>
 				
 				<h:outputLabel/>
-				<h:commandButton value="Register" action="#{newEntryBean.register}"/>
+				<h:commandButton value="Register" action="#{newEntryBean.register}">
+					<f:ajax execute="@form" render="@all"/>
+				</h:commandButton>
 				
 		</h:panelGrid>
 		<!-- For default, valitadors won't execute if any information is provided to the component. 
 				It can be changed by adding ...VALIDATE_EMPTY_FIELDS into the configuration file web.xml-->
-	</h:form>
+	</h:form>	
+		
+		
+	</ui:define>
+
+</ui:composition>
+
+
 	
-</h:body>
-</html>
+	
